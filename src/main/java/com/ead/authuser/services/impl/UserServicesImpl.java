@@ -4,6 +4,8 @@ import com.ead.authuser.models.UserModel;
 import com.ead.authuser.repositories.UserRepository;
 import com.ead.authuser.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -20,6 +22,7 @@ public class UserServicesImpl implements UserService {
     private String userName = UUID.randomUUID().toString();
     private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("UTC"));
     private LocalDateTime updatedAt = LocalDateTime.now(ZoneId.of("UTC"));
+
     @Autowired
     public UserServicesImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -52,17 +55,17 @@ public class UserServicesImpl implements UserService {
 
     @Override
     public UserModel updateUser(UserModel userModel) {
-        userModel = save(userModel);
-        return userModel;
-
-    }
-
-    private UserModel save(UserModel userModel) {
-        return userModel;
+        return userRepository.save(userModel);
     }
 
     @Override
+    public Page<UserModel> findAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+
+    @Override
     public Optional<UserModel> findById(UUID userId) {
-                                      return userRepository.findById(userId);
+        return userRepository.findById(userId);
     }
 }

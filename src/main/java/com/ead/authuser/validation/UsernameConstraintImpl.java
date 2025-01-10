@@ -2,9 +2,9 @@ package com.ead.authuser.validation;
 
 import jakarta.validation.ConstraintValidator;
 
-public class UsernameConstraintImpl implements ConstraintValidator<Usernameconstraint, String> {
+public class UsernameConstraintImpl implements ConstraintValidator<UsernameConstraint, String> {
     @Override
-    public void initialize(Usernameconstraint constraintAnnotation) {
+    public void initialize(UsernameConstraint constraintAnnotation) {
     }
 
     @Override
